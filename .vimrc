@@ -8,17 +8,20 @@ Plugin 'scrooloose/nerdtree'	" Project and file navigation
 Plugin 'vim-airline/vim-airline'
 Plugin 'powerline/powerline-fonts'
 Plugin 'morhetz/gruvbox'
+Plugin 'Yggdroot/indentLine'
 call vundle#end()
 filetype plugin indent on
 
 syntax on
+set modeline " # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+set ts=8 et sw=4 sts=4
+let g:indentLine_char = '┊'
+"set list lcs=tab:\┆\ 
 
 set background=dark
 color gruvbox
 let g:airline_powerline_fonts = 1
-
 set nu
-
 set laststatus=2
 
 set tw=0		" textwidth - 0, to stop automatic wrapping
