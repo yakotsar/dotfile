@@ -1,7 +1,7 @@
 FROM python
 WORKDIR ~
 RUN apt-get update \
-    && apt-get install -y vim \
+    && apt-get install vim \
     && mkdir ~/.dotfile \
     && git clone https://github.com/yakotsar/dotfile.git ~/.dotfile \
     && ln -s ~/.dotfile/.vimrc ~/.vimrc \
