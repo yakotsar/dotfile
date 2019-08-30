@@ -8,6 +8,7 @@ Plugin 'scrooloose/nerdtree'	" Project and file navigation
 Plugin 'vim-airline/vim-airline'
 Plugin 'morhetz/gruvbox'
 Plugin 'Yggdroot/indentLine'
+Plugin 'calviken/vim-gdscript3'
 call vundle#end()
 filetype plugin indent on
 
