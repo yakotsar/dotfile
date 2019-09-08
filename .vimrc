@@ -9,23 +9,26 @@ if empty(glob('~/.vim/bundle/Vundle.vim'))
     autocmd VimEnter * PluginInstall
 endif
 
-
 set nocompatible	" be iMproved, required
 filetype off		" required
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'morhetz/gruvbox'
 Plugin 'Yggdroot/indentLine'
 Plugin 'calviken/vim-gdscript3'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'dense-analysis/ale'
+
+"Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'airblade/vim-gitgutter'
 "Plugin 'majutsushi/tagbar'
+"Plugin 'vim-scripts/CSApprox'
+"Plugin 'sheerun/vim-polyglot'
+"Plugin 'tpope/vim-rhubarb'
 call vundle#end()
 filetype plugin indent on
 
@@ -72,6 +75,14 @@ map <F3> :NERDTreeToggle<CR>
 
 nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
 
+if has('unnamedplus')
+    set clipboard=unnamed,unnamedplus
+endif
+
+"noremap YY "+y<CR>
+"noremap <leader>p "+gP<CR>
+"noremap XX "+x<CR>
+
 nnoremap <silent> <leader>sh :terminal<CR>
 
 nnoremap <Tab> gt
@@ -91,6 +102,11 @@ vnoremap K :m '<-2<CR>gv=gv
 
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+":call extend(g:ale_linters, {
+    "\'python': ['flake8'],})
+
+let python_highlight_all = 1
 
 " Bind F5 to save file if modified and execute python script in a buffer.
 nnoremap <silent> <F5> :call SaveAndExecutePython()<CR>
@@ -153,3 +169,40 @@ function! SaveAndExecutePython()
     setlocal readonly
     setlocal nomodifiable
 endfunction
+
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+if !exists('g:airline_powerline_fonts')
+    let g:airline#extensions#tabline#left_sep = ' '
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline_left_sep          = '▶'
+    let g:airline_left_alt_sep      = '»'
+    let g:airline_right_sep         = '◀'
+    let g:airline_right_alt_sep     = '«'
+    let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+    let g:airline#extensions#readonly#symbol   = '⊘'
+    let g:airline#extensions#linecolumn#prefix = '¶'
+    let g:airline#extensions#paste#symbol      = 'ρ'
+    let g:airline_symbols.linenr    = '␊'
+    let g:airline_symbols.branch    = '⎇'
+    let g:airline_symbols.paste     = 'ρ'
+    let g:airline_symbols.paste     = 'Þ'
+    let g:airline_symbols.paste     = '∥'
+    let g:airline_symbols.whitespace = 'Ξ'
+else
+    let g:airline#extensions#tabline#left_sep = ''
+    let g:airline#extensions#tabline#left_alt_sep = ''
+
+" powerline symbols
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+    let g:airline_symbols.branch = ''
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.linenr = ''
+endif
+
