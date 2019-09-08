@@ -23,6 +23,8 @@ Plugin 'calviken/vim-gdscript3'
 Plugin 'tpope/vim-fugitive'
 Plugin 'dense-analysis/ale'
 
+Plugin 'junegunn/goyo.vim'
+
 "Plugin 'jistr/vim-nerdtree-tabs'
 "Plugin 'airblade/vim-gitgutter'
 "Plugin 'majutsushi/tagbar'
@@ -32,13 +34,23 @@ Plugin 'dense-analysis/ale'
 call vundle#end()
 filetype plugin indent on
 
-let mapleader=','
 syntax on
+set wildmenu
+set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+set ruler
+set cmdheight=2 "do I need it?
+set ttyfast
 set so=999
 set modeline " # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
 set ts=8 et sw=4 sts=4
 let g:indentLine_char = '┊'
 "set list lcs=tab:\┆\ 
+set showcmd
+set matchpairs+=<:>
+set list
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ [BUFFER=%n]\ %{strftime('%c')}
+set encoding=utf-8
 
 set background=dark
 color gruvbox
@@ -69,6 +81,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+let mapleader=','
+
 map <F2> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 map <F3> :NERDTreeToggle<CR>
@@ -97,6 +111,10 @@ noremap <C-h> <C-w>h
 vmap < <gv
 vmap > >gv
 
+"nmap <M-j> mz:m+<cr>`z
+"nmap <M-k> mz:m-2<cr>`z
+"vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+"vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -164,7 +182,7 @@ function! SaveAndExecutePython()
     " But if you close the output buffer then it returns to using the default
     " size when its reccreated
     "execute 'resize' . line('$')
-    
+
     " make the buffer non modifiable
     setlocal readonly
     setlocal nomodifiable
@@ -196,7 +214,7 @@ else
     let g:airline#extensions#tabline#left_sep = ''
     let g:airline#extensions#tabline#left_alt_sep = ''
 
-" powerline symbols
+    " powerline symbols
     let g:airline_left_sep = ''
     let g:airline_left_alt_sep = ''
     let g:airline_right_sep = ''
