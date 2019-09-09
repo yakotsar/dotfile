@@ -3,9 +3,9 @@ if empty(glob('~/.vim/bundle/Vundle.vim'))
         echoerr "You have to install git"
         execute "q!"
     endif
-    echo "Installing Vundle..."
-    echo ""
-    silent exec "!git clone -q https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+    "echo "Installing Vundle..."
+    "echo ""
+    silent exec "!\git clone -q https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
     autocmd VimEnter * PluginInstall
 endif
 
@@ -91,6 +91,8 @@ nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
 
 if has('unnamedplus')
     set clipboard=unnamed,unnamedplus
+else
+    echo "try to install vim-gnome or vim-gtk to get global clipboard"
 endif
 
 "noremap YY "+y<CR>
